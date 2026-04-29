@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Clock, Database, FileText, ShieldCheck } from "lucide-react";
 import { appModules, type AppModuleKey } from "@/config/modules";
 import { AppShell } from "@/components/layout/app-shell";
+import { moduleResources } from "@/features/modules/module-resources";
+import { ModuleWorkspace } from "@/features/modules/module-workspace";
 
 const modulePlans: Record<
   AppModuleKey,
@@ -63,7 +65,7 @@ export function ModuleFoundationPage({ moduleKey }: { moduleKey: AppModuleKey })
   return (
     <AppShell>
       <div className="space-y-6">
-        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-3xl border border-slate-200/80 bg-white/95 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
           <div className="bg-gradient-to-br from-slate-950 via-cyan-950 to-slate-900 p-8 text-white">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl">
@@ -76,7 +78,7 @@ export function ModuleFoundationPage({ moduleKey }: { moduleKey: AppModuleKey })
               </div>
               <Link
                 href="/login"
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-white px-4 text-sm font-semibold text-slate-950 shadow-sm transition hover:bg-cyan-50"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-white px-4 text-sm font-semibold text-slate-950 shadow-[0_18px_45px_rgba(15,23,42,0.06)] transition hover:bg-cyan-50"
               >
                 Masuk aplikasi
                 <ArrowRight className="h-4 w-4" />
@@ -86,7 +88,7 @@ export function ModuleFoundationPage({ moduleKey }: { moduleKey: AppModuleKey })
         </section>
 
         <section className="grid gap-4 lg:grid-cols-3">
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/95 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-950">
               <Database className="h-4 w-4 text-cyan-700" />
               Schema target
@@ -94,14 +96,14 @@ export function ModuleFoundationPage({ moduleKey }: { moduleKey: AppModuleKey })
             <p className="mt-3 font-mono text-2xl font-semibold text-cyan-700">{appModule.targetSchema}</p>
             <p className="mt-2 text-sm leading-5 text-slate-600">Domain ini disiapkan untuk migrasi bertahap dari {appModule.legacyDatabase}.</p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/95 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-950">
               <ShieldCheck className="h-4 w-4 text-emerald-700" />
               Guardrail
             </div>
             <p className="mt-3 text-sm leading-6 text-slate-600">Semua proses simpan penting wajib melewati server action/API route, validasi Zod, dan transaksi database.</p>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/95 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
             <div className="flex items-center gap-2 text-sm font-semibold text-slate-950">
               <Clock className="h-4 w-4 text-amber-700" />
               Status
@@ -111,8 +113,10 @@ export function ModuleFoundationPage({ moduleKey }: { moduleKey: AppModuleKey })
           </div>
         </section>
 
+        <ModuleWorkspace resources={moduleResources[moduleKey]} storageKey={`jibas-modern-${moduleKey}`} />
+
         <section className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/95 p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
             <div className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-cyan-700" />
               <h2 className="text-lg font-semibold text-slate-950">Form prioritas</h2>
@@ -134,7 +138,7 @@ export function ModuleFoundationPage({ moduleKey }: { moduleKey: AppModuleKey })
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="rounded-3xl border border-slate-200/80 bg-white/95 p-6 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
             <h2 className="text-lg font-semibold text-slate-950">Langkah berikutnya</h2>
             <div className="mt-5 space-y-4">
               {plan.nextSteps.map((step) => (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +12,7 @@ type LoginState =
   | { status: "error"; message: string };
 
 export function LoginForm() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [state, setState] = useState<LoginState>({ status: "idle", message: "" });
 
@@ -32,10 +34,16 @@ export function LoginForm() {
       return;
     }
 
+    window.localStorage.setItem(
+      "jibas-modern-session",
+      JSON.stringify({ username, role: "Admin", loginAt: new Date().toISOString() }),
+    );
+
     setState({
       status: "success",
-      message: "Login berhasil sebagai admin.",
+      message: "Login berhasil sebagai admin. Mengalihkan ke dashboard...",
     });
+    router.push("/");
   }
 
   return (
